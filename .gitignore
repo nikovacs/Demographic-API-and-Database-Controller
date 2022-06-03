@@ -1,0 +1,10 @@
+.idea/
+*.txt
+*.ipynb
+test.py
+dist/
+*.spec
+build/
+*.json
+venv/
+__pycache__/
