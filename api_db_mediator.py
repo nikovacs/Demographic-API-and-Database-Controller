@@ -121,10 +121,10 @@ class API_DB_Mediator:
         # make gdp table (county or state depending on for_)
         tables_linecodes_for_table_creation = " ".join([f"{x} BIGINT," for x in tables_linecodes])
         self.__cursor.execute(f"""
-            IF OBJECT_ID('dbo.gdp_{for_}') IS NOT NULL
-                DROP TABLE dbo.gdp_{for_};
-            CREATE TABLE dbo.gdp_{for_} (
-                state VARCHAR(2) NOT NULL,
+            IF OBJECT_ID('dbo.{for_}_gdp') IS NOT NULL
+                DROP TABLE dbo.{for_}_gdp;
+            CREATE TABLE dbo.{for_}_gdp (
+                state CHAR(2) NOT NULL,
                 {if_county_create}
                 year smallint NOT NULL,
                 {tables_linecodes_for_table_creation}
@@ -150,13 +150,13 @@ class API_DB_Mediator:
             """)
 
             self.__cursor.execute(f"""
-                IF EXISTS (SELECT TOP 1 * from dbo.gdp_{for_} WHERE {if_county_compare.format(county)}state = '{state}' AND year = {year})
+                IF EXISTS (SELECT TOP 1 * from dbo.{for_}_gdp WHERE {if_county_compare.format(county)}state = '{state}' AND year = {year})
                 begin
-                    UPDATE dbo.gdp_{for_} SET {table_linecode} = {value} WHERE {if_county_compare.format(county)}state = '{state}' AND year = {year};
+                    UPDATE dbo.{for_}_gdp SET {table_linecode} = {value} WHERE {if_county_compare.format(county)}state = '{state}' AND year = {year};
                 end
                 ELSE
                 begin
-                    INSERT INTO dbo.gdp_{for_} (state, {if_county_column}year, {table_linecode})
+                    INSERT INTO dbo.{for_}_gdp (state, {if_county_column}year, {table_linecode})
                     VALUES ('{state}', {if_county.format(county)}{year}, {value});
                 end
             """)
@@ -441,7 +441,7 @@ class API_DB_Mediator:
                 DROP TABLE dbo.states;
             CREATE TABLE dbo.states (
                 FIP char(2) NOT NULL,
-                State char(2) NOT NULL,
+                state char(2) NOT NULL,
                 PRIMARY KEY (FIP)
             );
         """)
@@ -485,7 +485,7 @@ class API_DB_Mediator:
 
 
     def __init_state_unemployment_table(self):
-        # make named table "state_unemployment_rate"
+        # make named table "state_unemployment"
         self.__cursor.execute("""
             IF OBJECT_ID('dbo.state_unemployment_rate', 'U') IS NOT NULL
                 DROP TABLE dbo.state_unemployment_rate;
@@ -643,5 +643,5 @@ class API_DB_Mediator:
             tables = request_info['tables'][tables]
         return ','.join([' '.join(x.split(',')) for x in tables])
 
-    def debugger(self, arg):
-        return self.__cursor.execute(arg)
+    # def debugger(self, arg):
+    #     return self.__cursor.execute(arg)
