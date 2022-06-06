@@ -110,9 +110,12 @@ For most of the data, the last 3-5 years are requested. This can be changed by c
   * Command Line
     * Must provide one keyword arg
     * ```py db_updater -h``` for help/possible arguments
-    * ```py db_updater -t <table_name>``` to initialize the specified table.
+    * ```py db_updater -t <table_name>``` to initialize the specified table. (Currently only one command line arg is supported at a time)
   * GUI
     * To use the GUI, run db_updater.py either on the command line (```py db_updater.py```) with no arguments or double click.
+
+* To automatically reinitialize the tables when new data is available, reference the appropriate website for the data bls, census or bea, and find their release schedules
+  * For windows, create jobs in task scheduler with the appropriate tables as arguments.
 
 ### Requirements
 * All the requirements (more or less depending on whether/how you choose to use/distribute the program) are located inside requirements.txt 
@@ -122,7 +125,7 @@ For most of the data, the last 3-5 years are requested. This can be changed by c
 For Windows:
 ```
 py -m venv .venv
-.venv\Scripts\activate
+.\.venv\Scripts\activate
 py -m pip install -r requirements.txt
 ```
 
