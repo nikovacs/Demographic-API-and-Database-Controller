@@ -1,6 +1,7 @@
 """
 Parent program for the API_DB_Mediator.
-Use from command line (or .bat) to perform actions at scheduled times
+Use from command line to initialize specific tables (or all) (py db_updater.py -t [table_name]) 
+Double click or run with no args for GUI interface.
 
 Author: Nikolas Kovacs
 """

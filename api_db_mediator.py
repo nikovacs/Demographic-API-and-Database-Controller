@@ -1,5 +1,13 @@
 """
 This class serves as a bridge between the database and the APIs
+
+All SQL is written for MSSQL
+
+Only code for initializing the database is written, not updating.
+Due to the freqency (or lack thereof) of new data, it is arguably easier (but obviously less efficient) to just reinitialize 
+whole table(s) overnight when new data is available.
+
+Author: Nikolas Kovacs
 """
 
 import pyodbc

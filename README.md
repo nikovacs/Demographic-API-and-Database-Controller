@@ -132,3 +132,6 @@ python3 -m venv .venv
 source .venv/bin/activate
 python3 -m pip install -r requirements.txt
 ```
+
+### Other Notes:
+* All the SQL in this project is written for MSSQL. If you are using something else with slightly different syntax, you will have to modify the SQL statements.
