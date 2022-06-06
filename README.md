@@ -116,6 +116,7 @@ For most of the data, the last 3-5 years are requested. This can be changed by c
 
 * To automatically reinitialize the tables when new data is available, reference the appropriate website for the data bls, census or bea, and find their release schedules
   * For windows, create jobs in task scheduler with the appropriate tables as arguments.
+  * For Linux/Mac, use crontab
 
 ### Requirements
 * All the requirements (more or less depending on whether/how you choose to use/distribute the program) are located inside requirements.txt 
