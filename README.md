@@ -1,5 +1,5 @@
 # Demographic Database Updater
-# by: Nikolas Kovacs
+### by: Nikolas Kovacs
 
 #### This program retrieves the following information from:
 * BLS.gov
